@@ -85,6 +85,7 @@ filters and the action should not execute_
 		    dispatched = false;
 		}
 	}
+	
     
 * Not returning false, after the redirect, in the filter prevents the StackOverflow
 
