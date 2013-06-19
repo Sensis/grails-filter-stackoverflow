@@ -66,9 +66,9 @@ filters and the action should not execute_
 	Infinite filter and eventually a StackOverflow. Notiice how the url mapping is configured with a view as opposed to a controler/action
 
 
-## Debugging ##
+##Debugging##
 
-* Culprit seems to be org.codehaus.groovy.grails.web.mapping.filter.UrlMappingsFilter - renderViewForUrlMappingInfo 
+Culprit seems to be org.codehaus.groovy.grails.web.mapping.filter.UrlMappingsFilter - renderViewForUrlMappingInfo 
 
 		
 	if (viewName == null || viewName.endsWith(GSP_SUFFIX) || viewName.endsWith(JSP_SUFFIX)) {
@@ -87,5 +87,5 @@ filters and the action should not execute_
 	}
 	
     
-* Not returning false, after the redirect, in the filter prevents the StackOverflow
+Not returning false, after the redirect, in the filter prevents the StackOverflow
 
