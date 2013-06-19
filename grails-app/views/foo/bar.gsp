@@ -4,6 +4,6 @@
   <title>Kaboom</title>
 </head>
 <body>
-    <p>Kaboom</p>
+    <p>THis is the foo bar page which is just a placeholder</p>
 </body>
 </html>
