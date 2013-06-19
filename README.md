@@ -56,14 +56,14 @@ filters and the action should not execute_
 > grails run-app
 
 1. http://localhost:8080/
-Successful redirect to grails.org
+	Successful redirect to grails.org
 
 
 2. http://localhost:8080/allGood
-Successful redirect to grails.org
+	Successful redirect to grails.org
 
 3. http://localhost:8080/stackOverflow
-Infinite filter and eventually a StackOverflow. Notiice how the url mapping is configured with a view as opposed to a controler/action
+	Infinite filter and eventually a StackOverflow. Notiice how the url mapping is configured with a view as opposed to a controler/action
 
 
 ## Debugging ##
@@ -71,20 +71,20 @@ Infinite filter and eventually a StackOverflow. Notiice how the url mapping is c
 * Culprit seems to be org.codehaus.groovy.grails.web.mapping.filter.UrlMappingsFilter - renderViewForUrlMappingInfo 
 
 		
-    if (viewName == null || viewName.endsWith(GSP_SUFFIX) || viewName.endsWith(JSP_SUFFIX)) {
-        if (info.isParsingRequest()) {
-            webRequest.informParameterCreationListeners();
-        }
-        String forwardUrl = WebUtils.forwardRequestForUrlMappingInfo(request, response, info);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Matched URI [" + uri + "] to URL mapping [" + info + "], forwarding to [" + forwardUrl + "] with response [" + response.getClass() + "]");
-        }
-    }
-    else {
-        if (!renderViewForUrlMappingInfo(request, response, info, viewName)) {
-            dispatched = false;
-        }
-    }
+	if (viewName == null || viewName.endsWith(GSP_SUFFIX) || viewName.endsWith(JSP_SUFFIX)) {
+		if (info.isParsingRequest()) {
+		    webRequest.informParameterCreationListeners();
+		}
+		String forwardUrl = WebUtils.forwardRequestForUrlMappingInfo(request, response, info);
+		if (LOG.isDebugEnabled()) {
+		    LOG.debug("Matched URI [" + uri + "] to URL mapping [" + info + "], forwarding to [" + forwardUrl + "] with response [" + response.getClass() + "]");
+		}
+	}
+	else {
+		if (!renderViewForUrlMappingInfo(request, response, info, viewName)) {
+		    dispatched = false;
+		}
+	}
     
 * Not returning false, after the redirect, in the filter prevents the StackOverflow
 
