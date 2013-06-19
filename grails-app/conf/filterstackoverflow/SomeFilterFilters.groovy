@@ -5,7 +5,7 @@ class SomeFilterFilters {
         all(uri: '/**') {
             before = {
                 redirect(url: "http://grails.org")
-//                return false // May have multiple filters so return false after a redirect
+                return false // May have multiple filters so return false after a redirect
             }
         }
     }
