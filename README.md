@@ -86,6 +86,6 @@ Culprit seems to be org.codehaus.groovy.grails.web.mapping.filter.UrlMappingsFil
 		}
 	}
 	
-    
-Not returning false, after the redirect, in the filter prevents the StackOverflow
-
+The issue can be prevented by doing either of the following:
+1. Not returning false after the redirect in the filter
+2. Changing the url mapping to map to a controller/action instead of a view
