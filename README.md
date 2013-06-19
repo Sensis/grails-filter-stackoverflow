@@ -1,4 +1,57 @@
-grails-filter-stackoverflow
-===========================
+# grails-filter-stackoverflow #
 
-Bare grails app to demonstrate stackoverflows when filters applied to urlmappings that point to views
+
+Bare grails 2.2.2 app to demonstrate stackoverflows when filters applied to urlmappings that point to views
+
+## Info ##
+
+An app with 3 http request mappings and a single filter that is apploed to all incomming requests via: 
+	all(uri: '/**')
+	
+The expected behavior is with a request to any of the 3  url mappings, the filter should kick in and redirect to grails.org.
+
+Here are the relevant url mappings: 
+
+	class UrlMappings {
+		static mappings = {
+	     "/"(controller: 'foo', action: 'bar')
+			"/allGood"(controller:"foo", action:"bar")
+			"/stackOverflow" (view:'/foo/bar')
+	
+	        "400"(controller: 'foo', action: 'bar')
+	        "403"(controller: 'foo', action: 'bar')
+	        "404"(controller: 'foo', action: 'bar')
+	        "500"(controller: 'foo', action: 'bar')
+	
+		}
+	}
+
+###Basic Filter ###
+
+class SomeFilterFilters {
+    def filters = {
+        all(uri: '/**') {
+            before = {
+                redirect(url: "http://grails.org")
+                return false // May have multiple filters so return false after a redirect
+            }
+        }
+    }
+}
+
+
+## Actual Behavior ## 
+
+> grails run-app
+
+1. http://localhost:8080/
+Successful redirect to grails.org
+
+
+2. http://localhost:8080/allGood
+Successful redirect to grails.org
+
+2. http://localhost:8080/stackOverflow
+Infinite filter and eventually a StackOverflow. Notiice how the url mapping is configured with a view as opposed to a controler/action
+
+
