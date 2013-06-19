@@ -5,7 +5,7 @@ Bare grails 2.2.2 app to demonstrate stackoverflows when filters applied to urlm
 
 ## Info ##
 
-An minimal grails app with 3 http request mappings and a single filter that is apploed to all incomming requests via: 
+An minimal grails app with 3 http request mappings and a single filter that is applied to all  incoming requests via:
 	all(uri: '/**')
 	
 The expected behavior is with a request to any of the 3  url mappings, the filter should kick in and redirect to grails.org.
